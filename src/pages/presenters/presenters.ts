@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { Presenter } from '../../models/presenter';
+import { WdiconfPresenters } from '../../providers/wdiconf-presenters';
 
 /*
   Generated class for the Presenters page.
@@ -12,8 +14,13 @@ import { NavController } from 'ionic-angular';
   templateUrl: 'presenters.html'
 })
 export class PresentersPage {
+  presenters: Presenter[];
 
-  constructor(public navCtrl: NavController) {}
+  constructor(public navCtrl: NavController, private wdiconfPresenters: WdiconfPresenters) {
+    wdiconfPresenters.load().subscribe(presenters => {
+      this.presenters = presenters;
+    })
+  }
 
   ionViewDidLoad() {
     console.log('Hello PresentersPage Page');

@@ -6,6 +6,8 @@ import { PresenterDetailsPage } from '../pages/presenter-details/presenter-detai
 import { VenuesPage } from '../pages/venues/venues';
 import { VenueDetailsPage } from '../pages/venue-details/venue-details';
 import { WdiconfVenues } from '../providers/wdiconf-venues';
+import { WdiconfPresenters } from '../providers/wdiconf-presenters';
+
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import { WdiconfVenues } from '../providers/wdiconf-venues';
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     WdiconfVenues,
+    WdiconfPresenters
   ]
 })
 export class AppModule {}
