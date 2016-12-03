@@ -1,4 +1,4 @@
-# WdiConfApp
+# Wdi Conf App
 
 ## Technologies used
 HTML5, SCSS, Javascript, TypeScript, AngularJS, Ionic, Xcode
