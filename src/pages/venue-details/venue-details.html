@@ -6,13 +6,24 @@
 -->
 <ion-header>
 
-  <ion-title>
-    Venue Details
-  </ion-title>
+  <ion-navbar>
+    <ion-title>
+      {{venue?.name}} Details
+    </ion-title>
+  </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
   <h3>Venue Details</h3>
+
+  <ion-content padding>
+      <h1 item-center>{{venue?.name}}</h1>
+      <img item-center [src]=venue?.image_url>
+      <p item-center>{{venue?.address}}</p>
+      <h2>Events</h2>
+
+
+  </ion-content>
 </ion-content>
