@@ -8,6 +8,8 @@ import { PresenterDetailsPage } from '../pages/presenter-details/presenter-detai
 import { VenuesPage } from '../pages/venues/venues';
 import { VenueDetailsPage } from '../pages/venue-details/venue-details';
 
+import { AboutPage } from '../pages/about/about';
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -24,7 +26,8 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Presenters', component: PresentersPage },
-      { title: 'Venues', component: VenuesPage }
+      { title: 'Venues', component: VenuesPage },
+      { title: 'About', component: AboutPage }
     ];
 
   }

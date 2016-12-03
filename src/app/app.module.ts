@@ -7,7 +7,7 @@ import { VenuesPage } from '../pages/venues/venues';
 import { VenueDetailsPage } from '../pages/venue-details/venue-details';
 import { WdiconfVenues } from '../providers/wdiconf-venues';
 import { WdiconfPresenters } from '../providers/wdiconf-presenters';
-
+import { AboutPage } from '../pages/about/about';
 
 @NgModule({
   declarations: [
@@ -15,7 +15,8 @@ import { WdiconfPresenters } from '../providers/wdiconf-presenters';
     PresentersPage,
     PresenterDetailsPage,
     VenuesPage,
-    VenueDetailsPage
+    VenueDetailsPage,
+    AboutPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -26,7 +27,8 @@ import { WdiconfPresenters } from '../providers/wdiconf-presenters';
     PresentersPage,
     PresenterDetailsPage,
     VenuesPage,
-    VenueDetailsPage
+    VenueDetailsPage,
+    AboutPage
 
   ],
   providers: [
