@@ -8,10 +8,12 @@ import { VenueDetailsPage } from '../pages/venue-details/venue-details';
 import { WdiconfVenues } from '../providers/wdiconf-venues';
 import { WdiconfPresenters } from '../providers/wdiconf-presenters';
 import { AboutPage } from '../pages/about/about';
+import { HomePage } from '../pages/home/home';
 
 @NgModule({
   declarations: [
     MyApp,
+    HomePage,
     PresentersPage,
     PresenterDetailsPage,
     VenuesPage,
@@ -24,11 +26,13 @@ import { AboutPage } from '../pages/about/about';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    HomePage,
     PresentersPage,
     PresenterDetailsPage,
     VenuesPage,
     VenueDetailsPage,
     AboutPage
+
 
   ],
   providers: [
