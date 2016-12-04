@@ -9,6 +9,8 @@ import { WdiconfVenues } from '../providers/wdiconf-venues';
 import { WdiconfPresenters } from '../providers/wdiconf-presenters';
 import { AboutPage } from '../pages/about/about';
 import { HomePage } from '../pages/home/home';
+import { WdiconfEvents } from '../providers/wdiconf-events';
+
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import { HomePage } from '../pages/home/home';
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     WdiconfVenues,
-    WdiconfPresenters
+    WdiconfPresenters,
+    WdiconfEvents
   ]
 })
 export class AppModule {}

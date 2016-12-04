@@ -1,18 +1,23 @@
-<!--
-  Generated template for the PresenterDetails page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
-    <ion-title>presenter-details</ion-title>
+    <ion-title></ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content padding align="center">
+  <h2>{{presenter?.first_name}} {{presenter?.last_name}}</h2>
+  <img [src]="presenter?.image_url">
+  <p>{{presenter?.bio}}</p>
+  <ion-list>
+    <button ion-item *ngFor="let event of presenterEvents">
+      <ion-avatar item-left>
+        <img [src]="event.image_url">
+      </ion-avatar>
+      <h2>{{event.name}}</h2>
+      <ion-icon name="arrow-forward" item-right></ion-icon>
+    </button>
+  </ion-list>
 </ion-content>
