@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
+
+import { Presenter } from '../../models/presenter';
+import { Event } from '../../models/event';
+import { WdiconfPresenters } from '../../providers/wdiconf-presenters';
+import { WdiconfEvents } from '../../providers/wdiconf-events';
+
 
 /*
   Generated class for the PresenterDetails page.
@@ -12,8 +18,19 @@ import { NavController } from 'ionic-angular';
   templateUrl: 'presenter-details.html'
 })
 export class PresenterDetailsPage {
+  presenter: Presenter;
+  presenterEvents: Event[];
+  presenter_id: number;
 
-  constructor(public navCtrl: NavController) {}
+  constructor(public navCtrl: NavController, private navParams: NavParams, private wdiconfPresenters: WdiconfPresenters, private wdiconfEvents: WdiconfEvents) {
+    this.presenter_id = navParams.get('id');
+    wdiconfPresenters.loadDetails(this.presenter_id).subscribe(presenter => {
+      this.presenter = presenter;
+    })
+    wdiconfEvents.loadForPresenter(this.presenter_id).subscribe(events => {
+      this.presenterEvents = events;
+    })
+  }
 
   ionViewDidLoad() {
     console.log('Hello PresenterDetailsPage Page');

@@ -3,6 +3,8 @@ import { NavController } from 'ionic-angular';
 import { Presenter } from '../../models/presenter';
 import { WdiconfPresenters } from '../../providers/wdiconf-presenters';
 
+import { PresenterDetailsPage } from '../presenter-details/presenter-details';
+
 /*
   Generated class for the Presenters page.
 
@@ -24,6 +26,10 @@ export class PresentersPage {
 
   ionViewDidLoad() {
     console.log('Hello PresentersPage Page');
+  }
+
+  goToDetails(id: string) {
+    this.navCtrl.push(PresenterDetailsPage, {id});
   }
 
 }

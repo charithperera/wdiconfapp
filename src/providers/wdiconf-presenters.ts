@@ -22,7 +22,12 @@ export class WdiconfPresenters {
 
   load(): Observable<Presenter[]> {
     return this.http.get(`${this.wdiconfPresentersApiUrl}`)
-      .map(res => <Presenter[]>res.json().Results);
+      .map(res => <Presenter[]>res.json().results);
+  }
+
+  loadDetails(id: number): Observable<Presenter> {
+    return this.http.get(`${this.wdiconfPresentersApiUrl}/${id}`)
+      .map(res => <Presenter>(res.json().results[0]))
   }
 
 }
