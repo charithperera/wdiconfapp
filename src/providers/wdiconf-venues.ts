@@ -23,13 +23,13 @@ export class WdiconfVenues {
   // Load all wdiconf venues
   load(): Observable<Venue[]> {
     return this.http.get(`${this.wdiconfVenuesApiUrl}`)
-      .map(res => <Venue[]>res.json().Results);
+      .map(res => <Venue[]>res.json().results);
   }
 
   // Get venue details user by venue ID
   loadDetails(id: string): Observable<Venue> {
     return this.http.get(`${this.wdiconfVenuesApiUrl}/${id}`)
-      .map(res => <Venue>(res.json().Results));
+      .map(res => <Venue>(res.json().results));
   }
 
 
