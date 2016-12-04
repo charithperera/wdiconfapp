@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 import { Venue } from '../../models/venue';
-
-import {  WdiconfVenues } from '../../providers/wdiconf-venues';
+import { WdiconfVenues } from '../../providers/wdiconf-venues';
+import { VenueDetailsPage } from '../venue-details/venue-details';
 
 /*
   Generated class for the Venues page.
@@ -24,9 +24,12 @@ export class VenuesPage {
       this.venues = venues;
 })
   }
-
   ionViewDidLoad() {
-    console.log('Hello VenuesPage Page');
+    console.log('Hello VenuesDetail Page');
   }
+  goToDetails(id: string) {
+    this.navCtrl.push(VenueDetailsPage, {id});
+  }
+
 
 }

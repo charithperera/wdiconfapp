@@ -7,16 +7,20 @@ import { VenuesPage } from '../pages/venues/venues';
 import { VenueDetailsPage } from '../pages/venue-details/venue-details';
 import { WdiconfVenues } from '../providers/wdiconf-venues';
 import { WdiconfPresenters } from '../providers/wdiconf-presenters';
+import { AboutPage } from '../pages/about/about';
+import { HomePage } from '../pages/home/home';
 import { WdiconfEvents } from '../providers/wdiconf-events';
 
 
 @NgModule({
   declarations: [
     MyApp,
+    HomePage,
     PresentersPage,
     PresenterDetailsPage,
     VenuesPage,
-    VenueDetailsPage
+    VenueDetailsPage,
+    AboutPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -24,10 +28,13 @@ import { WdiconfEvents } from '../providers/wdiconf-events';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    HomePage,
     PresentersPage,
     PresenterDetailsPage,
     VenuesPage,
-    VenueDetailsPage
+    VenueDetailsPage,
+    AboutPage
+
 
   ],
   providers: [

@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
+
+import { Venue } from '../../models/venue';
+
+import { WdiconfVenues } from '../../providers/wdiconf-venues';
+
 
 /*
   Generated class for the VenueDetails page.
@@ -12,11 +17,19 @@ import { NavController } from 'ionic-angular';
   templateUrl: 'venue-details.html'
 })
 export class VenueDetailsPage {
-
-  constructor(public navCtrl: NavController) {}
+  venue: Venue;
+  id: string;
 
   ionViewDidLoad() {
-    console.log('Hello VenueDetailsPage Page');
+    console.log('Hello UserDetails Page');
+  }
+  constructor(public navCtrl: NavController, private navParams: NavParams, private wdiconfVenues: WdiconfVenues) {
+    this.id = navParams.get('id');
+    console.log(this.venue);
+    wdiconfVenues.loadDetails(this.id).subscribe(venue => {
+      this.venue = venue[0];
+      console.log(venue)
+    })
   }
 
 }
