@@ -34,6 +34,11 @@ export class WdiconfEvents {
       .map(res => <Event[]>res.json().results);
   }
 
+  loadForVenue(id: number): Observable<Event[]> {
+    return this.http.get(`${this.wdiconfEventsApiUrl}?venue_id=${id}`)
+      .map(res => <Event[]>res.json().results);
+  }
+
   loadForEvents(id: number): Observable<Event[]> {
     return this.http.get(`${this.wdiconfEventsApiUrl}?venue_id=${id}`)
       .map(res => <Event[]>res.json().results);
