@@ -13,6 +13,7 @@
   <img [src]=venue?.image_url>
   <p>{{venue?.address}}</p>
   <p>Perhaps a venue description here. Why not?</p>
+
   <ion-list>
     <button ion-item *ngFor="let event of venueEvents" (click)="goToEvent(event.id)">
       <h2>{{event.name}}</h2>

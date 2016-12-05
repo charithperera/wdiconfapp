@@ -9,6 +9,7 @@ import { WdiconfEvents } from '../../providers/wdiconf-events';
 
 import { EventDetailsPage } from '../event-details/event-details';
 
+
 @Component({
   selector: 'page-venue-details',
   templateUrl: 'venue-details.html'
@@ -16,17 +17,26 @@ import { EventDetailsPage } from '../event-details/event-details';
 export class VenueDetailsPage {
   venue: Venue;
   venueEvents: Event[];
+
   venueId: number;
 
   ionViewDidLoad() {
     console.log('Hello UserDetails Page');
   }
   constructor(public navCtrl: NavController, private navParams: NavParams, private wdiconfVenues: WdiconfVenues, private wdiconfEvents: WdiconfEvents) {
+
     this.venueId = navParams.get('id');
 
     wdiconfVenues.loadDetails(this.venueId).subscribe(venue => {
+
       this.venue = venue[0];
     })
+
+    wdiconfEvents.loadForEvents(this.venueId).subscribe(events => {
+      this.venueEvents = events;
+      console.log(events)
+    })
+
 
     wdiconfEvents.loadForVenue(this.venueId).subscribe(events => {
       this.venueEvents = events;
@@ -35,6 +45,7 @@ export class VenueDetailsPage {
 
   goToEvent(id: string) {
     this.navCtrl.push(EventDetailsPage, {id});
+
   }
 
 }
