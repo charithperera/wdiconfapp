@@ -19,6 +19,16 @@ export class WdiconfEvents {
     console.log('Hello WdiconfEvents Provider');
   }
 
+  load(): Observable<Event[]> {
+    return this.http.get(`${this.wdiconfEventsApiUrl}`)
+      .map(res => <Event[]>res.json().results);
+  }
+
+  loadDetails(id: number): Observable<Event> {
+    return this.http.get(`${this.wdiconfEventsApiUrl}/${id}`)
+      .map(res => <Event>(res.json().results[0]))
+  }
+
   loadForPresenter(id: number): Observable<Event[]> {
     return this.http.get(`${this.wdiconfEventsApiUrl}?presenter_id=${id}`)
       .map(res => <Event[]>res.json().results);
@@ -26,6 +36,11 @@ export class WdiconfEvents {
 
   loadForEvents(id: number): Observable<Event[]> {
     return this.http.get(`${this.wdiconfEventsApiUrl}?venue_id=${id}`)
+      .map(res => <Event[]>res.json().results);
+  }
+
+  loadForDate(date: string): Observable<Event[]> {
+    return this.http.get(`${this.wdiconfEventsApiUrl}?date=${date}&sort=time&order=desc`)
       .map(res => <Event[]>res.json().results);
   }
 

@@ -11,6 +11,8 @@ import { VenueDetailsPage } from '../pages/venue-details/venue-details';
 import { AboutPage } from '../pages/about/about';
 import { HomePage } from '../pages/home/home';
 
+import { EventsPage } from '../pages/events/events';
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -29,6 +31,7 @@ export class MyApp {
       { title: 'Home', component: HomePage },
       { title: 'Presenters', component: PresentersPage },
       { title: 'Venues', component: VenuesPage },
+      { title: 'Events', component: EventsPage },
       { title: 'About', component: AboutPage }
     ];
 

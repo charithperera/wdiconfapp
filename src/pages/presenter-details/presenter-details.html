@@ -1,14 +1,15 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title></ion-title>
+    <ion-title>
+      {{presenter?.first_name}} {{presenter?.last_name}}
+    </ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding align="center">
-  <h2>{{presenter?.first_name}} {{presenter?.last_name}}</h2>
   <img [src]="presenter?.image_url">
   <p>{{presenter?.bio}}</p>
   <ion-list>
