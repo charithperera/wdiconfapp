@@ -11,9 +11,12 @@ import { VenueDetailsPage } from '../pages/venue-details/venue-details';
 import { AboutPage } from '../pages/about/about';
 import { HomePage } from '../pages/home/home';
 
+import { ProfilePage } from '../pages/profile/profile';
+
 @Component({
   templateUrl: 'app.html'
 })
+
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
@@ -29,7 +32,8 @@ export class MyApp {
       { title: 'Home', component: HomePage },
       { title: 'Presenters', component: PresentersPage },
       { title: 'Venues', component: VenuesPage },
-      { title: 'About', component: AboutPage }
+      { title: 'About', component: AboutPage },
+      { title: 'Profile', component: ProfilePage }
     ];
 
   }
