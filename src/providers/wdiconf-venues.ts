@@ -27,10 +27,11 @@ export class WdiconfVenues {
   }
 
   // Get venue details user by venue ID
-  loadDetails(id: string): Observable<Venue> {
+  loadDetails(id: number): Observable<Venue> {
     return this.http.get(`${this.wdiconfVenuesApiUrl}/${id}`)
       .map(res => <Venue>(res.json().results));
   }
+
 
 
 }
