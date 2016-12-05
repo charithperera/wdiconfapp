@@ -7,12 +7,9 @@ import { Event } from '../../models/event';
 import { WdiconfVenues } from '../../providers/wdiconf-venues';
 import { WdiconfEvents } from '../../providers/wdiconf-events';
 
-/*
-  Generated class for the VenueDetails page.
+import { EventDetailsPage } from '../event-details/event-details';
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
+
 @Component({
   selector: 'page-venue-details',
   templateUrl: 'venue-details.html'
@@ -20,22 +17,35 @@ import { WdiconfEvents } from '../../providers/wdiconf-events';
 export class VenueDetailsPage {
   venue: Venue;
   venueEvents: Event[];
-  venue_id: number;
+
+  venueId: number;
 
   ionViewDidLoad() {
     console.log('Hello UserDetails Page');
   }
   constructor(public navCtrl: NavController, private navParams: NavParams, private wdiconfVenues: WdiconfVenues, private wdiconfEvents: WdiconfEvents) {
-    this.venue_id = navParams.get('id');
-    console.log(this.venue);
-    wdiconfVenues.loadDetails(this.venue_id).subscribe(venue => {
+
+    this.venueId = navParams.get('id');
+
+    wdiconfVenues.loadDetails(this.venueId).subscribe(venue => {
+
       this.venue = venue[0];
-      console.log(venue)
     })
-    wdiconfEvents.loadForEvents(this.venue_id).subscribe(events => {
+
+    wdiconfEvents.loadForEvents(this.venueId).subscribe(events => {
       this.venueEvents = events;
       console.log(events)
     })
+
+
+    wdiconfEvents.loadForVenue(this.venueId).subscribe(events => {
+      this.venueEvents = events;
+    })
+  }
+
+  goToEvent(id: string) {
+    this.navCtrl.push(EventDetailsPage, {id});
+
   }
 
 }

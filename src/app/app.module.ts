@@ -9,6 +9,8 @@ import { WdiconfVenues } from '../providers/wdiconf-venues';
 import { WdiconfPresenters } from '../providers/wdiconf-presenters';
 import { AboutPage } from '../pages/about/about';
 import { HomePage } from '../pages/home/home';
+import { EventsPage } from '../pages/events/events';
+import { EventDetailsPage } from '../pages/event-details/event-details';
 import { WdiconfEvents } from '../providers/wdiconf-events';
 import { ProfilePage } from '../pages/profile/profile';
 import { UserLogin } from '../providers/user-login';
@@ -40,8 +42,10 @@ export function getAuthHttp(http) {
     PresenterDetailsPage,
     VenuesPage,
     VenueDetailsPage,
-    AboutPage,
-    ProfilePage
+    ProfilePage,
+    EventsPage,
+    EventDetailsPage,
+    AboutPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -54,9 +58,10 @@ export function getAuthHttp(http) {
     PresenterDetailsPage,
     VenuesPage,
     VenueDetailsPage,
-    AboutPage,
-    ProfilePage
-
+    ProfilePage,
+    EventsPage,
+    EventDetailsPage,
+    AboutPage
 
   ],
   providers: [

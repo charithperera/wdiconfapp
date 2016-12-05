@@ -13,6 +13,8 @@ import { HomePage } from '../pages/home/home';
 
 import { ProfilePage } from '../pages/profile/profile';
 
+import { EventsPage } from '../pages/events/events';
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -32,8 +34,9 @@ export class MyApp {
       { title: 'Home', component: HomePage },
       { title: 'Presenters', component: PresentersPage },
       { title: 'Venues', component: VenuesPage },
-      { title: 'About', component: AboutPage },
-      { title: 'Profile', component: ProfilePage }
+      { title: 'Profile', component: ProfilePage },
+      { title: 'Events', component: EventsPage },
+      { title: 'About', component: AboutPage }
     ];
 
   }

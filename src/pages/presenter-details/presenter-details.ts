@@ -5,14 +5,9 @@ import { Presenter } from '../../models/presenter';
 import { Event } from '../../models/event';
 import { WdiconfPresenters } from '../../providers/wdiconf-presenters';
 import { WdiconfEvents } from '../../providers/wdiconf-events';
+import { EventDetailsPage } from '../event-details/event-details';
 
 
-/*
-  Generated class for the PresenterDetails page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-presenter-details',
   templateUrl: 'presenter-details.html'
@@ -30,6 +25,10 @@ export class PresenterDetailsPage {
     wdiconfEvents.loadForPresenter(this.presenter_id).subscribe(events => {
       this.presenterEvents = events;
     })
+  }
+
+  goToEvent(id: string) {
+    this.navCtrl.push(EventDetailsPage, {id});
   }
 
   ionViewDidLoad() {

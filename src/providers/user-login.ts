@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
-import { User } from '../models/user';
+
 
 
 
@@ -27,11 +27,7 @@ export class UserLogin {
   //     .map(res => <User[]>res.json());
   // }
 
-  // Load all user1
-  load(): Observable<User[]> {
-    return this.http.get(`${this.wdiConfUser}/users/1`)
-      .map(res => <User[]>res.json().results);
-  }
+
 
 
 }
