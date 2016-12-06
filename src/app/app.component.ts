@@ -22,7 +22,7 @@ import { EventsPage } from '../pages/events/events';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = PresentersPage;
+  rootPage: any = ProfilePage;
 
   pages: Array<{title: string, component: any}>;
 

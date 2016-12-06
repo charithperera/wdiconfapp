@@ -21,25 +21,59 @@
 
 
 <ion-content padding>
-  <form *ngIf="!loggedIn" #form="ngForm" (ngSubmit)="logForm(form)" novalidate>
-     <ion-item>
-       <ion-label>Email</ion-label>
-       <ion-input type="text" required [(ngModel)]="loginDetails.email" name="email"></ion-input>
-     </ion-item>
-     <ion-item>
-       <ion-label>Password</ion-label>
-       <ion-input [(ngModel)]="loginDetails.password" name="password" type="password"></ion-input>
-     </ion-item>
-     <button ion-button type="submit" block>Login</button>
-   </form>
+  <div *ngIf="showLogin">
+    <h1>Login page</h1>
+    <form #form="ngForm" (ngSubmit)="loginForm(form)" novalidate>
+       <ion-item>
+         <ion-label>Email</ion-label>
+         <ion-input type="text" required [(ngModel)]="loginDetails.email" name="email"></ion-input>
+       </ion-item>
+       <ion-item>
+         <ion-label>Password</ion-label>
+         <ion-input [(ngModel)]="loginDetails.password" name="password" type="password"></ion-input>
+       </ion-item>
+       <br>
+       <button ion-button type="submit" block>Login</button>
+     </form>
+     <hr>
+     <p>Create an account?</p>
+     <button color="light" ion-button (click)="loadSignup()">Sign up</button>
+   </div>
+
+    <div *ngIf="showSignup">
+      <h1>Create an account</h1>
+      <form #form="ngForm" (ngSubmit)="signupForm(form)" novalidate>
+        <ion-item>
+           <ion-label>First name</ion-label>
+           <ion-input type="text" required [(ngModel)]="signupDetails.first_name" name="first_name"></ion-input>
+         </ion-item>
+         <ion-item>
+           <ion-label>Last name</ion-label>
+           <ion-input type="text" required [(ngModel)]="signupDetails.last_name" name="last_name"></ion-input>
+         </ion-item>
+         <ion-item>
+           <ion-label>Email</ion-label>
+           <ion-input type="text" required [(ngModel)]="signupDetails.email" name="email"></ion-input>
+         </ion-item>
+         <ion-item>
+           <ion-label>Password</ion-label>
+           <ion-input [(ngModel)]="signupDetails.password" name="password" type="password"></ion-input>
+         </ion-item>
+         <br>
+       <button ion-button type="submit" block>Sign up</button>
+     </form>
+     
+     <p>Have a user account?</p>
+     <button color="light" ion-button (click)="loadLogin()">Login</button>
+    </div>
 
 
-  <div *ngIf="loggedIn" >
+  <div *ngIf="showProfile" >
+    <h1>Welcome {{user.first_name}} {{user.last_name}}</h1>
+    <img [src]="user.image_url" alt="">
 
-    <h1>WELCOME TIMMMO!</h1>
-    <img src="http://placehold.it/350x350" alt="">
-
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
+    <p>This is your beautiful face.</p>
+  
+    <button ion-button block (click)="logOut()">Log out</button>
   </div>
 </ion-content>
