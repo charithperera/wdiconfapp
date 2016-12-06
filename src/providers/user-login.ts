@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
-
-
-
 
 /*
   Generated class for the UserLogin provider.
@@ -22,10 +19,27 @@ export class UserLogin {
 
   }
 
-  // loadForEvents(email: string, password: string): Observable<Event[]> {
-  //   return this.http.post(`${this.wdiConfUser}?email=${id}&password=${password}`)
-  //     .map(res => <User[]>res.json());
-  // }
+  getJwt(loginDetails) {
+   // this.showConfirm(form.value);
+   console.log(loginDetails)
+   var creds = "email=" + loginDetails.email + "&password=" + loginDetails.password;
+   var headers = new Headers();
+   headers.append('Content-Type', 'application/x-www-form-urlencoded');
+
+   new Promise(resolve => {
+       this.http.post('http://wdiconfapi.herokuapp.com/authenticate', creds, {headers: headers}).subscribe(data => {
+           if(data){
+
+             resolve(true);
+           }
+           else
+             resolve(false);
+           return data.json
+       });
+   });
+ }
+
+
 
 
 
