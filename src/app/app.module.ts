@@ -72,6 +72,7 @@ export function getAuthHttp(http) {
     WdiconfVenues,
     WdiconfPresenters,
     WdiconfEvents,
+    UserLogin,
     {
       provide: AuthHttp,
       useFactory: getAuthHttp,

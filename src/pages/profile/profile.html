@@ -18,24 +18,62 @@
 
 </ion-header>
 
+
+
 <ion-content padding>
-  <ion-list>
+  <div *ngIf="showLogin">
+    <h1>Login page</h1>
+    <form #form="ngForm" (ngSubmit)="loginForm(form)" novalidate>
+       <ion-item>
+         <ion-label>Email</ion-label>
+         <ion-input type="text" required [(ngModel)]="loginDetails.email" name="email"></ion-input>
+       </ion-item>
+       <ion-item>
+         <ion-label>Password</ion-label>
+         <ion-input [(ngModel)]="loginDetails.password" name="password" type="password"></ion-input>
+       </ion-item>
+       <br>
+       <button ion-button type="submit" block>Login</button>
+     </form>
+     <hr>
+     <p>Create an account?</p>
+     <button color="light" ion-button (click)="loadSignup()">Sign up</button>
+   </div>
 
-  <ion-item>
-    <ion-label floating>Email</ion-label>
-    <ion-input [(ngModel)]="email" type="email" value=""></ion-input>
-  </ion-item>
+    <div *ngIf="showSignup">
+      <h1>Create an account</h1>
+      <form #form="ngForm" (ngSubmit)="signupForm(form)" novalidate>
+        <ion-item>
+           <ion-label>First name</ion-label>
+           <ion-input type="text" required [(ngModel)]="signupDetails.first_name" name="first_name"></ion-input>
+         </ion-item>
+         <ion-item>
+           <ion-label>Last name</ion-label>
+           <ion-input type="text" required [(ngModel)]="signupDetails.last_name" name="last_name"></ion-input>
+         </ion-item>
+         <ion-item>
+           <ion-label>Email</ion-label>
+           <ion-input type="text" required [(ngModel)]="signupDetails.email" name="email"></ion-input>
+         </ion-item>
+         <ion-item>
+           <ion-label>Password</ion-label>
+           <ion-input [(ngModel)]="signupDetails.password" name="password" type="password"></ion-input>
+         </ion-item>
+         <br>
+       <button ion-button type="submit" block>Sign up</button>
+     </form>
+     
+     <p>Have a user account?</p>
+     <button color="light" ion-button (click)="loadLogin()">Login</button>
+    </div>
 
-  <ion-item>
-    <ion-label floating>Password</ion-label>
-    <ion-input [(ngModel)]="password"  type="password" value=""></ion-input>
-  </ion-item>
 
-</ion-list>
+  <div *ngIf="showProfile" >
+    <h1>Welcome {{user.first_name}} {{user.last_name}}</h1>
+    <img [src]="user.image_url" alt="">
 
-<div>
-  <button ion-button type="submit" block (click)="login()">Sign In</button>
-</div>
-
-
+    <p>This is your beautiful face.</p>
+  
+    <button ion-button block (click)="logOut()">Log out</button>
+  </div>
 </ion-content>

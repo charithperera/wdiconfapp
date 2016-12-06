@@ -22,7 +22,7 @@
     <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="today" (ionChange)="dateChange($event)"></ion-datetime>
   </ion-item>
   <ion-list>
-    <button ion-item *ngFor="let event of events" (click)="goToDetails(event.id)">
+    <button detail-none ion-item *ngFor="let event of events" (click)="goToDetails(event.id)">
       <h2>{{ event?.name }}</h2>
       <p>{{ event?.date }} | {{ event?.time }}</p>
       <ion-icon name="arrow-forward" item-right></ion-icon>
