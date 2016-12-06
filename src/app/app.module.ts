@@ -14,6 +14,7 @@ import { EventDetailsPage } from '../pages/event-details/event-details';
 import { WdiconfEvents } from '../providers/wdiconf-events';
 import { ProfilePage } from '../pages/profile/profile';
 import { UserLogin } from '../providers/user-login';
+import { PurchasePage } from '../pages/purchase/purchase';
 
 // AUthentication
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
@@ -45,7 +46,8 @@ export function getAuthHttp(http) {
     ProfilePage,
     EventsPage,
     EventDetailsPage,
-    AboutPage
+    AboutPage,
+    PurchasePage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -61,7 +63,8 @@ export function getAuthHttp(http) {
     ProfilePage,
     EventsPage,
     EventDetailsPage,
-    AboutPage
+    AboutPage,
+    PurchasePage
 
   ],
   providers: [
