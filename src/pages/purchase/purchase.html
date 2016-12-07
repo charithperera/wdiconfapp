@@ -18,7 +18,7 @@
 
 <ion-content padding>
   <div *ngIf="!hasTicket">
-    <form (ngSubmit)="logForm()">
+    <form #form="ngForm" (ngSubmit)="logForm()" novalidate>
       <ion-item>
         <ion-label>Name</ion-label>
         <ion-input type="text" [(ngModel)]="card.name" name="name" data-stripe="name"></ion-input>
