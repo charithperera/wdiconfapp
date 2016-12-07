@@ -25,7 +25,7 @@
 
     <ion-item>
       <ion-label>Card Number</ion-label>
-      <ion-input type="text" [(ngModel)]="card.number"  data-stripe="number" name="number"></ion-input>
+      <ion-input type="text" [(ngModel)]="card.number" maxlength="16"  data-stripe="number" name="number"></ion-input>
     </ion-item>
 
     <ion-item>
