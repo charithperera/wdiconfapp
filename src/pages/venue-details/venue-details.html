@@ -11,8 +11,7 @@
 
 <ion-content padding align="center">
   <img [src]=venue?.image_url>
-  <p>{{venue?.address}}</p>
-  <p>Perhaps a venue description here. Why not?</p>
+  <h3><ion-icon name="pin" item-left></ion-icon> {{venue?.address}}</h3>
 
   <ion-list>
     <button ion-item *ngFor="let event of venueEvents" (click)="goToEvent(event.id)">
