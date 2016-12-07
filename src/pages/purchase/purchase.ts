@@ -1,5 +1,5 @@
 declare var Stripe;
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Http, Headers, Response} from '@angular/http';
 import { HomePage } from '../../home/home';
@@ -22,7 +22,7 @@ export class PurchasePage {
   ticketNumber;
   hasTicket: boolean = false;
 
-  constructor(public navCtrl: NavController, public http:Http) {
+  constructor(public navCtrl: NavController, public http: Http, private _ngZone: NgZone) {
     this.checkTicket();
     console.log(this);
   }
@@ -74,7 +74,10 @@ export class PurchasePage {
                 if(data){
                   console.log(data.json());
                   if (data.json().success) {
-                    self.checkTicket();
+                    // self.checkTicket();
+                    self._ngZone.run(() => {
+                      self.checkTicket();
+                    });
                   }
                   resolve(true);
                   // self.checkTicket();
