@@ -66,8 +66,9 @@ export class ProfilePage {
 
   checkToken() {
     this.showProfile = false;
+    this.showSignup = false;
+    this.showLogin = false;
     if (window.localStorage.getItem('wdiConfToken') !== null) {
-      this.showLogin = false;
       this.loadProfile();
     }
     else {
@@ -138,10 +139,10 @@ export class ProfilePage {
                // console.log(this.loggedIn);
               // this.showConfirm(data.json().token);
                window.localStorage.setItem('wdiConfToken', data.json().token);
-
+              this.checkToken();
              }
              resolve(true);
-             this.checkToken();
+
              this.loginDetails = {
                 email: "",
                 password: ""
@@ -177,7 +178,7 @@ export class ProfilePage {
                // this.loggedIn = true;
                // console.log(this.loggedIn);
               // this.showConfirm(data.json().token);
-               window.localStorage.setItem('wdiConfToken', data.json().token);
+               this.loginForm(form);
 
              }
              resolve(true);

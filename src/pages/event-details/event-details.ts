@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { WdiconfEvents } from '../../providers/wdiconf-events';
+import { WdiconfVenues } from '../../providers/wdiconf-venues';
 import { Event } from '../../models/event';
 
 
@@ -18,7 +19,7 @@ export class EventDetailsPage {
   event: Event;
   event_id: number;
 
-  constructor(public navCtrl: NavController, private navParams: NavParams, private wdiconfEvents: WdiconfEvents) {
+  constructor(public navCtrl: NavController, private navParams: NavParams, private wdiconfEvents: WdiconfEvents, private wdiconfVenue: WdiconfVenues) {
     this.event_id = navParams.get('id');
     wdiconfEvents.loadDetails(this.event_id).subscribe(event => {
       this.event = event;
