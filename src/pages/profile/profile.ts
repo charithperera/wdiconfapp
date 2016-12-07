@@ -18,6 +18,9 @@ import { Http, Headers } from '@angular/http';
 })
 export class ProfilePage {
 
+  login_error: string = '';
+  signup_error: string = '';
+
   loginDetails = {
     email: "",
     password: ""
@@ -53,21 +56,43 @@ export class ProfilePage {
   }
 
   loadSignup() {
+    // this.clearSignup();
     this.showLogin = false;
     this.showSignup = true;
     this.showProfile = false;
   }
 
   loadLogin() {
+    // this.clearLogin();
     this.showLogin = true;
     this.showSignup = false;
     this.showProfile = false;
   }
 
+  clearSignup() {
+    this.signup_error = '';
+    this.signupDetails = {
+      first_name: "",
+      last_name: "",
+      email: "",
+      password: ""
+    }
+  }
+
+  clearLogin() {
+    this.login_error = '';
+    this.loginDetails = {
+      email: "",
+      password: ""
+    }
+  }
+
   checkToken() {
     this.showProfile = false;
-    this.showSignup = false;
+    this.showSignup = false;;
     this.showLogin = false;
+    this.clearSignup();
+    this.clearLogin()
     if (window.localStorage.getItem('wdiConfToken') !== null) {
       this.loadProfile();
     }
@@ -112,19 +137,9 @@ export class ProfilePage {
 
   }
 
-  // logForm(form) {
-  //   var result = this.userLogin.getJwt(form.value)
-  //   console.log("hi" + result);
-  //
-  //
-  //   // if (data.json().success) {
-  //   // // this.showConfirm(data.json().token);
-  //   // window.localStorage.setItem('raja', data.json().token);
-  // }
-
   loginForm(form) {
    // this.showConfirm(form.value);
-   console.log(form.value)
+   // console.log(form.value);
    var creds = "email=" + form.value.email + "&password=" + form.value.password;
    var headers = new Headers();
    headers.append('Content-Type', 'application/x-www-form-urlencoded');
@@ -142,19 +157,11 @@ export class ProfilePage {
               this.checkToken();
              }
              resolve(true);
-
-             this.loginDetails = {
-                email: "",
-                password: ""
-              }
-             return (data.json);
+             this.login_error = data.json().msg;
+             return (data.json());
            }
            else {
              resolve(false);
-             this.loginDetails = {
-                email: "",
-                password: ""
-              }
            }
 
        });
@@ -173,7 +180,6 @@ export class ProfilePage {
    new Promise(resolve => {
        this.http.post('http://wdiconfapi.herokuapp.com/signup', creds, {headers: headers}).subscribe(data => {
            if(data){
-             console.log(data.json())
              if (data.json().success) {
                // this.loggedIn = true;
                // console.log(this.loggedIn);
@@ -181,24 +187,15 @@ export class ProfilePage {
                this.loginForm(form);
 
              }
-             resolve(true);
-             this.checkToken();
-             this.signupDetails = {
-                 first_name: "",
-                 last_name: "",
-                 email: "",
-                 password: ""
+             else {
+               if (data.json().err.code == 23505) {
+                 this.signup_error = "Email already has account";
                }
-             return (data.json);
+             }
+             resolve(true);
            }
            else {
              resolve(false);
-             this.signupDetails = {
-                 first_name: "",
-                 last_name: "",
-                 email: "",
-                 password: ""
-               }
            }
 
        });
