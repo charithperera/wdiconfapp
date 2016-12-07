@@ -44,12 +44,12 @@ export class ProfilePage {
 
 
   constructor(public navCtrl: NavController, private userLogin: UserLogin, public http: Http) {
-    
+
     this.checkToken();
     // this.showLogin = true;
     // this.showSignup = true;
     // this.showProfile = true;
-    
+
   }
 
   loadSignup() {
@@ -155,11 +155,55 @@ export class ProfilePage {
                 password: ""
               }
            }
-             
+
        });
    });
 
- }
+  }
+
+  signupForm(form) {
+   // this.showConfirm(form.value);
+   console.log(form.value)
+   var creds = "first_name=" + form.value.first_name + "&last_name=" + form.value.last_name + "&email=" + form.value.email + "&password=" + form.value.password;
+   var headers = new Headers();
+   headers.append('Content-Type', 'application/x-www-form-urlencoded');
+
+
+   new Promise(resolve => {
+       this.http.post('http://wdiconfapi.herokuapp.com/signup', creds, {headers: headers}).subscribe(data => {
+           if(data){
+             console.log(data.json())
+             if (data.json().success) {
+               // this.loggedIn = true;
+               // console.log(this.loggedIn);
+              // this.showConfirm(data.json().token);
+               window.localStorage.setItem('wdiConfToken', data.json().token);
+
+             }
+             resolve(true);
+             this.checkToken();
+             this.signupDetails = {
+                 first_name: "",
+                 last_name: "",
+                 email: "",
+                 password: ""
+               }
+             return (data.json);
+           }
+           else {
+             resolve(false);
+             this.signupDetails = {
+                 first_name: "",
+                 last_name: "",
+                 email: "",
+                 password: ""
+               }
+           }
+
+       });
+   });
+
+  }
 
    logOut() {
      console.log('HI');

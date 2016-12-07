@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { WdiconfEvents } from '../../providers/wdiconf-events';
 import { Event } from '../../models/event';
 
+
 /*
   Generated class for the EventDetails page.
 
