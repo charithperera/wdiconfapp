@@ -23,11 +23,11 @@ export class PurchasePage {
   hasTicket: boolean = false;
 
   constructor(public navCtrl: NavController, public http:Http) {
-    this.checkStripeToken();
+    this.checkTicket();
     console.log(this);
   }
 
-  checkStripeToken() {
+  checkTicket() {
     var headers = new Headers();
     var auth = 'Bearer ' + window.localStorage.getItem('wdiConfToken');
     // this.hasTicket = false;
@@ -74,14 +74,14 @@ export class PurchasePage {
                 if(data){
                   console.log(data.json());
                   if (data.json().success) {
-                    self.checkStripeToken();
+                    self.checkTicket();
                   }
                   resolve(true);
-                  // self.checkStripeToken();
+                  // self.checkTicket();
                 }
                 else {
                   resolve(false);
-                  // self.checkStripeToken();
+                  // self.checkTicket();
                 }
             });
 
