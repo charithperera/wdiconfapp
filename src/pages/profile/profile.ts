@@ -5,6 +5,8 @@ import { UserLogin } from '../../providers/user-login';
 
 import { Http, Headers } from '@angular/http';
 
+import { PurchasePage } from '../purchase/purchase';
+
 /*
   Generated class for the Profile page.
 
@@ -201,6 +203,10 @@ export class ProfilePage {
        });
    });
 
+  }
+
+  buyTicket() {
+    this.navCtrl.push(PurchasePage);
   }
 
    logOut() {
