@@ -20,7 +20,7 @@ export class PurchasePage {
   card = {};
 
   constructor(public navCtrl: NavController, public http:Http) {
-
+    console.log('ready');
   }
 
   ionViewDidLoad() {
@@ -37,14 +37,16 @@ export class PurchasePage {
       else {
         var token = response.id;
         var headers = new Headers();
-        headers.append('Content-Type', 'application/json');
+        var auth = 'Bearer ' + window.localStorage.getItem('wdiConfToken');
+        headers.append('Authorization', auth);
         var token_obj = { stripeToken: token }
         new Promise(resolve => {
-            self.http.post('http://localhost:3000/payment', token_obj, headers).subscribe(data => {
+            self.http.post('http://localhost:3000/payment', token_obj, {headers: headers}).subscribe(data => {
+            // self.http.post('http://localhost:3000/payment', token_obj, headers).subscribe(data => {
                 if(data){
                   console.log(data.json())
                   if (data.json().success) {
-                    
+
                   }
                   resolve(true);
                 }
