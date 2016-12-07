@@ -2,6 +2,7 @@ declare var Stripe;
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Http, Headers, Response} from '@angular/http';
+import { HomePage } from '../../home/home';
 
 import 'rxjs/add/operator/map';
 
@@ -18,9 +19,35 @@ import 'rxjs/add/operator/map';
 export class PurchasePage {
 
   card = {};
+  ticketNumber;
+  hasTicket: boolean = false;
 
   constructor(public navCtrl: NavController, public http:Http) {
-    console.log('ready');
+    this.checkStripeToken();
+    console.log(this);
+  }
+
+  checkStripeToken() {
+    var headers = new Headers();
+    var auth = 'Bearer ' + window.localStorage.getItem('wdiConfToken');
+    // this.hasTicket = false;
+
+    headers.append('Authorization', auth);
+    new Promise(resolve => {
+       this.http.get('http://localhost:3000/checkforticket', {headers: headers}).subscribe(data => {
+           if(data){
+             if (data.json().ticket) {
+               console.log("HELLOOOO");
+               this.hasTicket = true;
+               this.ticketNumber = data.json().ticketNumber
+             }
+             resolve(true);
+           }
+           else {
+             resolve(false);
+           }
+       });
+    });
   }
 
   ionViewDidLoad() {
@@ -30,6 +57,7 @@ export class PurchasePage {
     var data = {};
     var url = 'https://wdiconfapi.herokuapp.com/payment';
     var self = this;
+    var success = false;
     Stripe.card.createToken(this.card, function(status, response) {
       if (response.error) {
         console.log("Error")
@@ -44,19 +72,22 @@ export class PurchasePage {
             self.http.post('http://localhost:3000/payment', token_obj, {headers: headers}).subscribe(data => {
             // self.http.post('http://localhost:3000/payment', token_obj, headers).subscribe(data => {
                 if(data){
-                  console.log(data.json())
+                  console.log(data.json());
                   if (data.json().success) {
-
+                    self.checkStripeToken();
                   }
                   resolve(true);
+                  // self.checkStripeToken();
                 }
-                else
+                else {
                   resolve(false);
-                  return (data.json);
+                  // self.checkStripeToken();
+                }
             });
+
         });
       }
     });
+    console.log(self);
   }
-
 }

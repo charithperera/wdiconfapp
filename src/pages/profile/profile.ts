@@ -44,12 +44,12 @@ export class ProfilePage {
 
 
   constructor(public navCtrl: NavController, private userLogin: UserLogin, public http: Http) {
-    
+
     this.checkToken();
     // this.showLogin = true;
     // this.showSignup = true;
     // this.showProfile = true;
-    
+
   }
 
   loadSignup() {
@@ -130,7 +130,7 @@ export class ProfilePage {
 
 
    new Promise(resolve => {
-       this.http.post('http://wdiconfapi.herokuapp.com/authenticate', creds, {headers: headers}).subscribe(data => {
+       this.http.post('http://localhost:3000/authenticate', creds, {headers: headers}).subscribe(data => {
            if(data){
              console.log(data.json())
              if (data.json().success) {
@@ -155,7 +155,7 @@ export class ProfilePage {
                 password: ""
               }
            }
-             
+
        });
    });
 
