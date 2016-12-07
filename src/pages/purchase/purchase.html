@@ -17,31 +17,40 @@
 
 
 <ion-content padding>
-  <form (ngSubmit)="logForm()">
-    <ion-item>
-      <ion-label>Name</ion-label>
-      <ion-input type="text" [(ngModel)]="card.name" name="name" data-stripe="name"></ion-input>
-    </ion-item>
+  <div *ngIf="!hasTicket">
+    <form (ngSubmit)="logForm()">
+      <ion-item>
+        <ion-label>Name</ion-label>
+        <ion-input type="text" [(ngModel)]="card.name" name="name" data-stripe="name"></ion-input>
+      </ion-item>
 
-    <ion-item>
-      <ion-label>Card Number</ion-label>
-      <ion-input type="text" [(ngModel)]="card.number" maxlength="16"  data-stripe="number" name="number"></ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label>Card Number</ion-label>
+        <ion-input type="text" [(ngModel)]="card.number" maxlength="16"  data-stripe="number" name="number"></ion-input>
+      </ion-item>
 
-    <ion-item>
-      <ion-label>Exp Month</ion-label>
-      <ion-input type="text" size="2" [(ngModel)]="card.exp_month"  data-stripe="exp_month" name="exp_month"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Exp year</ion-label>
-      <ion-input type="text" size="2" [(ngModel)]="card.exp_year"  data-stripe="exp_year" name="exp_year"></ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label>Exp Month</ion-label>
+        <ion-input type="text" size="2" [(ngModel)]="card.exp_month"  data-stripe="exp_month" name="exp_month"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Exp year</ion-label>
+        <ion-input type="text" size="2" [(ngModel)]="card.exp_year"  data-stripe="exp_year" name="exp_year"></ion-input>
+      </ion-item>
 
-    <ion-item>
-      <ion-label>CVC</ion-label>
-      <ion-input type="text" [(ngModel)]="card.cvc"  data-stripe="cvc" name="cvc"></ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label>CVC</ion-label>
+        <ion-input type="text" [(ngModel)]="card.cvc"  data-stripe="cvc" name="cvc"></ion-input>
+      </ion-item>
 
-    <button ion-button type="submit" block>Add Todo</button>
-  </form>
+      <button ion-button type="submit" block>Add Todo</button>
+    </form>
+    <p>{{hasTicket}}</p>
+  </div>
+
+  <div *ngIf="hasTicket">
+    <h2>Your ticket number is: {{ticketNumber}}</h2>
+  </div>
+
+  <button ion-button (click)="applySuccess()">TRY HARDER</button>
 </ion-content>
