@@ -5,6 +5,8 @@ import { UserLogin } from '../../providers/user-login';
 
 import { Http, Headers } from '@angular/http';
 
+import { PurchasePage } from '../purchase/purchase';
+
 /*
   Generated class for the Profile page.
 
@@ -17,6 +19,9 @@ import { Http, Headers } from '@angular/http';
   templateUrl: 'profile.html'
 })
 export class ProfilePage {
+
+  login_error: string = '';
+  signup_error: string = '';
 
   loginDetails = {
     email: "",
@@ -42,32 +47,50 @@ export class ProfilePage {
   showSignup: boolean = false;
   showProfile: boolean = false;
 
+  loginError: string = ""
+  signupError: string = ""
+
 
   constructor(public navCtrl: NavController, private userLogin: UserLogin, public http: Http) {
 
     this.checkToken();
-    // this.showLogin = true;
-    // this.showSignup = true;
-    // this.showProfile = true;
 
   }
 
   loadSignup() {
+    // this.clearSignup();
     this.showLogin = false;
     this.showSignup = true;
     this.showProfile = false;
   }
 
   loadLogin() {
+    // this.clearLogin();
     this.showLogin = true;
     this.showSignup = false;
     this.showProfile = false;
   }
 
-  checkToken() {
+  hideAllPages() {
     this.showProfile = false;
-    this.showSignup = false;
+    this.showSignup = false;;
     this.showLogin = false;
+    this.loginDetails = {
+      email: "",
+      password: ""
+    }
+    this.signupDetails = {
+      first_name: "",
+      last_name: "",
+      email: "",
+      password: ""
+    }
+  }
+
+  checkToken() {
+    this.loginError = "";
+    this.signupError = "";
+    this.hideAllPages();
     if (window.localStorage.getItem('wdiConfToken') !== null) {
       this.loadProfile();
     }
@@ -91,10 +114,6 @@ export class ProfilePage {
                if (data.json().success) {
                  console.log(data.json().user);
                  this.user = data.json().user;
-                 // this.loggedIn = true;
-                 // console.log(this.loggedIn);
-                // this.showConfirm(data.json().token);
-                 // window.localStorage.setItem('wdiConfToken', data.json().token);
                  this.showProfile = true;
 
                } else {
@@ -106,25 +125,13 @@ export class ProfilePage {
                this.showLogin = true;
                resolve(false);
              }
-               // return (data.json);
          });
       });
 
   }
 
-  // logForm(form) {
-  //   var result = this.userLogin.getJwt(form.value)
-  //   console.log("hi" + result);
-  //
-  //
-  //   // if (data.json().success) {
-  //   // // this.showConfirm(data.json().token);
-  //   // window.localStorage.setItem('raja', data.json().token);
-  // }
-
   loginForm(form) {
-   // this.showConfirm(form.value);
-   console.log(form.value)
+    this.hideAllPages();
    var creds = "email=" + form.value.email + "&password=" + form.value.password;
    var headers = new Headers();
    headers.append('Content-Type', 'application/x-www-form-urlencoded');
@@ -135,26 +142,16 @@ export class ProfilePage {
            if(data){
              console.log(data.json())
              if (data.json().success) {
-               // this.loggedIn = true;
-               // console.log(this.loggedIn);
-              // this.showConfirm(data.json().token);
                window.localStorage.setItem('wdiConfToken', data.json().token);
               this.checkToken();
              }
+             else {
+               this.loginError = data.json().msg;
+             }
              resolve(true);
-
-             this.loginDetails = {
-                email: "",
-                password: ""
-              }
-             return (data.json);
            }
            else {
              resolve(false);
-             this.loginDetails = {
-                email: "",
-                password: ""
-              }
            }
 
        });
@@ -163,8 +160,6 @@ export class ProfilePage {
   }
 
   signupForm(form) {
-   // this.showConfirm(form.value);
-   console.log(form.value)
    var creds = "first_name=" + form.value.first_name + "&last_name=" + form.value.last_name + "&email=" + form.value.email + "&password=" + form.value.password;
    var headers = new Headers();
    headers.append('Content-Type', 'application/x-www-form-urlencoded');
@@ -173,41 +168,29 @@ export class ProfilePage {
    new Promise(resolve => {
        this.http.post('http://wdiconfapi.herokuapp.com/signup', creds, {headers: headers}).subscribe(data => {
            if(data){
-             console.log(data.json())
              if (data.json().success) {
-               // this.loggedIn = true;
-               // console.log(this.loggedIn);
-              // this.showConfirm(data.json().token);
                this.loginForm(form);
-
+             }
+             else {
+               if (data.json().err.code == 23505) {
+                 this.signup_error = "Email already has account";
+               }
              }
              resolve(true);
-             this.checkToken();
-             this.signupDetails = {
-                 first_name: "",
-                 last_name: "",
-                 email: "",
-                 password: ""
-               }
-             return (data.json);
            }
            else {
              resolve(false);
-             this.signupDetails = {
-                 first_name: "",
-                 last_name: "",
-                 email: "",
-                 password: ""
-               }
            }
-
        });
    });
 
   }
 
+  buyTicket() {
+    this.navCtrl.push(PurchasePage);
+  }
+
    logOut() {
-     console.log('HI');
      window.localStorage.removeItem('wdiConfToken')
      this.checkToken();
    }

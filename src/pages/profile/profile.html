@@ -33,6 +33,7 @@
          <ion-input [(ngModel)]="loginDetails.password" name="password" type="password"></ion-input>
        </ion-item>
        <br>
+       <p color="danger">{{loginError}}</p>
        <button ion-button type="submit" block>Login</button>
      </form>
      <hr>
@@ -60,6 +61,7 @@
            <ion-input [(ngModel)]="signupDetails.password" name="password" type="password"></ion-input>
          </ion-item>
          <br>
+       <p color="danger">{{signupError}}</p>
        <button ion-button type="submit" block>Sign up</button>
      </form>
 
@@ -70,10 +72,6 @@
 
   <div *ngIf="showProfile" >
     <h1>Welcome {{user.first_name}} {{user.last_name}}</h1>
-    <img [src]="user.image_url" alt="">
-
-    <p>This is your beautiful face.</p>
-
     <button ion-button block (click)="logOut()">Log out</button>
   </div>
 </ion-content>

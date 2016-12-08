@@ -33,6 +33,10 @@ export class EventsPage {
     console.log('Hello EventsPage Page');
   }
 
+  revertOriginal() {
+    this.events = this.originalEvents;
+  }
+
   dateChange(dateEvent) {
     var dateParsed = dateEvent.year.text + dateEvent.month.text + dateEvent.day.text;
     this.wdiconfEvents.loadForDate(dateParsed).subscribe(events => {

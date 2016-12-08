@@ -20,7 +20,8 @@
   <ion-searchbar (input)="search($event)"></ion-searchbar>
   <ion-item>
     <ion-label>Date</ion-label>
-    <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="today" (ionChange)="dateChange($event)"></ion-datetime>
+    <ion-datetime displayFormat="DD/MM/YYYY" min="2016-12-09" max="2016-12-12" [(ngModel)]="today" (ionChange)="dateChange($event)"></ion-datetime>
+    <button ion-button item-right color="light" (click)="revertOriginal()">All</button>
   </ion-item>
   <ion-list>
     <button detail-none ion-item *ngFor="let event of events" (click)="goToDetails(event.id)">

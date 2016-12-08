@@ -27,7 +27,7 @@ export class WdiconfEvents {
   }
 
   load(): Observable<Event[]> {
-    return this.http.get(`${this.wdiconfEventsApiUrl}`)
+    return this.http.get(`${this.wdiconfEventsApiUrl}?sort=date`)
       .map(res => <Event[]>res.json().results);
   }
 
