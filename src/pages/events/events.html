@@ -24,6 +24,9 @@
   </ion-item>
   <ion-list>
     <button detail-none ion-item *ngFor="let event of events" (click)="goToDetails(event.id)">
+      <ion-avatar item-left>
+        <img [src]="event.image_url">
+      </ion-avatar>
       <h2>{{ event?.name }}</h2>
       <p>{{ event?.date }} | {{ event?.time }}</p>
       <ion-icon name="arrow-forward" item-right></ion-icon>
