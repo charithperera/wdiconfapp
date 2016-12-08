@@ -24,7 +24,7 @@ import { PurchasePage } from '../pages/purchase/purchase';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = ProfilePage;
+  rootPage: any = HomePage;
 
   pages: Array<{title: string, component: any}>;
 

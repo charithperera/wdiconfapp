@@ -4,7 +4,11 @@ page-presenter-details {
     border-radius: 15%;
   }
 
-  p {
+  p, h3 {
     text-align: left;
+  }
+
+  .profile {
+    border-radius: 50%;
   }
 }

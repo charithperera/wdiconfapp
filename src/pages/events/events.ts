@@ -18,16 +18,23 @@ import { EventDetailsPage } from '../event-details/event-details';
 export class EventsPage {
   today;
   events: Event[];
+  originalEvents: Event[];
 
   constructor(public navCtrl: NavController, private wdiconfEvents: WdiconfEvents) {
     this.today = new Date().toISOString();
     wdiconfEvents.load().subscribe(events => {
       this.events = events;
+      this.originalEvents = events;
+
     })
   }
 
   ionViewDidLoad() {
     console.log('Hello EventsPage Page');
+  }
+
+  revertOriginal() {
+    this.events = this.originalEvents;
   }
 
   dateChange(dateEvent) {
@@ -39,6 +46,17 @@ export class EventsPage {
 
   goToDetails(id: number) {
     this.navCtrl.push(EventDetailsPage, {id});
+  }
+
+  search(searchEvent) {
+    var term = searchEvent.target.value
+    if (term.trim() === '' || term.trim().length < 1) {
+      this.events = this.originalEvents;
+    } else {
+      this.wdiconfEvents.searchEvents(term).subscribe(events => {
+        this.events = events;
+      });
+    }
   }
 
 }

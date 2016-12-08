@@ -16,6 +16,7 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-searchbar (input)="search($event)"></ion-searchbar>  
   <ion-list>
       <button detail-none ion-item detail-none *ngFor="let venue of venues" (click)="goToDetails(venue.id)">
         <ion-avatar item-left>

@@ -27,7 +27,7 @@ export class WdiconfEvents {
   }
 
   load(): Observable<Event[]> {
-    return this.http.get(`${this.wdiconfEventsApiUrl}`)
+    return this.http.get(`${this.wdiconfEventsApiUrl}?sort=date`)
       .map(res => <Event[]>res.json().results);
   }
 
@@ -60,5 +60,10 @@ export class WdiconfEvents {
     return this.http.get(`${this.wdiconfEventsApiUrl}?date_from=${this.upNextDate}&time_from=${this.upNextTime}`)
       .map(res => <Event[]>res.json().results);
   }
+
+  searchEvents(searchParam: string): Observable<Event[]> {
+    return this.http.get(`${this.wdiconfEventsApiUrl}?q=${searchParam}`)
+      .map(res => <Event[]>(res.json().results))
+  }  
 
 }

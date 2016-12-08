@@ -18,10 +18,12 @@ import { VenueDetailsPage } from '../venue-details/venue-details';
 export class VenuesPage {
 
   venues: Venue[]
+  originalVenues: Venue[];
 
   constructor(public navCtrl: NavController, private wdiconfVenues: WdiconfVenues) {
     wdiconfVenues.load().subscribe(venues => {
       this.venues = venues;
+      this.originalVenues = venues;
 })
   }
   ionViewDidLoad() {
@@ -29,6 +31,17 @@ export class VenuesPage {
   }
   goToDetails(id: string) {
     this.navCtrl.push(VenueDetailsPage, {id});
+  }
+
+  search(searchEvent) {
+    var term = searchEvent.target.value
+    if (term.trim() === '' || term.trim().length < 1) {
+      this.venues = this.originalVenues;
+    } else {
+      this.wdiconfVenues.searchVenues(term).subscribe(venues => {
+        this.venues = venues;
+      });
+    }
   }
 
 
