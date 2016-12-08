@@ -15,4 +15,4 @@ HTML5, SCSS, Javascript, TypeScript, AngularJS, Ionic, Xcode
 
 ## Sample site on web browser
 
-[http://wdiconf.mahjam.es/](http://wdiconf.mahjam.es/)
+[https://jamesmah.github.io/wdiconfweb/](https://jamesmah.github.io/wdiconfweb/)
