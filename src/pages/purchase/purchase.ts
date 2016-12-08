@@ -1,7 +1,10 @@
 declare var Stripe;
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Http, Headers, Response} from '@angular/http';
+import { HomePage } from '../../home/home';
+import { ProfilePage } from '../../pages/profile/profile';
+
 
 import 'rxjs/add/operator/map';
 
@@ -18,9 +21,37 @@ import 'rxjs/add/operator/map';
 export class PurchasePage {
 
   card = {};
+  ticketNumber;
+  hasTicket: boolean = false;
+  loggedIn: boolean = false;
+  paymentError: string = '';
 
-  constructor(public navCtrl: NavController, public http:Http) {
+  constructor(public navCtrl: NavController, public http: Http, private _ngZone: NgZone) {
+    if (window.localStorage.getItem('wdiConfToken') !== null) {
+      this.loggedIn = true;
+      this.checkTicket();
+    }
+  }
 
+  checkTicket() {
+    var headers = new Headers();
+    var auth = 'Bearer ' + window.localStorage.getItem('wdiConfToken');
+
+    headers.append('Authorization', auth);
+    new Promise(resolve => {
+       this.http.get('https://wdiconfapi.herokuapp.com/checkforticket', {headers: headers}).subscribe(data => {
+           if(data){
+             if (data.json().ticket) {
+               this.hasTicket = true;
+               this.ticketNumber = data.json().ticketNumber;
+             }
+             resolve(true);
+           }
+           else {
+             resolve(false);
+           }
+       });
+    });
   }
 
   ionViewDidLoad() {
@@ -30,31 +61,38 @@ export class PurchasePage {
     var data = {};
     var url = 'https://wdiconfapi.herokuapp.com/payment';
     var self = this;
+    var success = false;
     Stripe.card.createToken(this.card, function(status, response) {
       if (response.error) {
-        console.log("Error")
+        // need to show errorpage
+        self._ngZone.run(() => {
+          self.paymentError = response.error.message;
+        });
       }
       else {
         var token = response.id;
         var headers = new Headers();
-        headers.append('Content-Type', 'application/json');
+        var auth = 'Bearer ' + window.localStorage.getItem('wdiConfToken');
+        headers.append('Authorization', auth);
         var token_obj = { stripeToken: token }
         new Promise(resolve => {
-            self.http.post('http://localhost:3000/payment', token_obj, headers).subscribe(data => {
+            self.http.post('https://wdiconfapi.herokuapp.com/payment', token_obj, {headers: headers}).subscribe(data => {
                 if(data){
-                  console.log(data.json())
+                  console.log(data.json());
                   if (data.json().success) {
-                    
+                    self._ngZone.run(() => {
+                      self.checkTicket();
+                    });
                   }
                   resolve(true);
                 }
-                else
+                else {
                   resolve(false);
-                  return (data.json);
+                }
             });
+
         });
       }
     });
   }
-
 }
