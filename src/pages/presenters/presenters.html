@@ -11,7 +11,7 @@
 
 <ion-content padding>
   <ion-list>
-    <button ion-item *ngFor="let presenter of presenters" (click)="goToDetails(presenter.id)">
+    <button detail-none ion-item *ngFor="let presenter of presenters" (click)="goToDetails(presenter.id)">
       <ion-avatar item-left>
         <img [src]="presenter.image_url">
       </ion-avatar>

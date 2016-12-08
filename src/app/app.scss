@@ -22,6 +22,7 @@
 
 img {
   width: 100%;
+  text-align: left;
 }
 
 p {
@@ -48,6 +49,14 @@ h1, h2, h3 {
   background-color: transparent;
   // color: white;
   color: black;
+}
+
+
+#lbl-7,
+#lbl-21,
+.input-wrapper {
+  color: #096849;
+  font-size: 1.2em;
 }
 
 
