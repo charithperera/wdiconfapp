@@ -5,6 +5,8 @@ import { UserLogin } from '../../providers/user-login';
 
 import { Http, Headers } from '@angular/http';
 
+import { PurchasePage } from '../purchase/purchase';
+
 /*
   Generated class for the Profile page.
 
@@ -17,6 +19,9 @@ import { Http, Headers } from '@angular/http';
   templateUrl: 'profile.html'
 })
 export class ProfilePage {
+
+  login_error: string = '';
+  signup_error: string = '';
 
   loginDetails = {
     email: "",
@@ -53,12 +58,14 @@ export class ProfilePage {
   }
 
   loadSignup() {
+    // this.clearSignup();
     this.showLogin = false;
     this.showSignup = true;
     this.showProfile = false;
   }
 
   loadLogin() {
+    // this.clearLogin();
     this.showLogin = true;
     this.showSignup = false;
     this.showProfile = false;
@@ -66,7 +73,7 @@ export class ProfilePage {
 
   hideAllPages() {
     this.showProfile = false;
-    this.showSignup = false;
+    this.showSignup = false;;
     this.showLogin = false;
     this.loginDetails = {
       email: "",
@@ -161,12 +168,13 @@ export class ProfilePage {
    new Promise(resolve => {
        this.http.post('http://wdiconfapi.herokuapp.com/signup', creds, {headers: headers}).subscribe(data => {
            if(data){
-             console.log(data.json())
              if (data.json().success) {
                this.loginForm(form);
              }
              else {
-               this.signupError = "Email already used";
+               if (data.json().err.code == 23505) {
+                 this.signup_error = "Email already has account";
+               }
              }
              resolve(true);
            }
@@ -176,6 +184,10 @@ export class ProfilePage {
        });
    });
 
+  }
+
+  buyTicket() {
+    this.navCtrl.push(PurchasePage);
   }
 
    logOut() {
