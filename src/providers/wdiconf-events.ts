@@ -14,6 +14,13 @@ import { Event } from '../models/event';
 @Injectable()
 export class WdiconfEvents {
   wdiconfEventsApiUrl = "https://wdiconfapi.herokuapp.com/api/events";
+  now = new Date( Date.now() );
+  hours = this.now.getHours();
+  year = this.now.getFullYear();
+  month = (this.now.getMonth() + 1 < 10) ? ("0" + ( this.now.getMonth() + 1 )) : this.now.getMonth() + 1;
+  day = (this.now.getDate() < 10) ? ("0" + this.now.getDate()) : this.now.getDate();
+  upNextDate = "" + this.year + this.month + this.day;
+  upNextTime = this.hours + "00";
 
   constructor(public http: Http) {
     console.log('Hello WdiconfEvents Provider');
@@ -46,6 +53,11 @@ export class WdiconfEvents {
 
   loadForDate(date: string): Observable<Event[]> {
     return this.http.get(`${this.wdiconfEventsApiUrl}?date=${date}&sort=time&order=desc`)
+      .map(res => <Event[]>res.json().results);
+  }
+
+  loadUpNext(): Observable<Event[]> {
+    return this.http.get(`${this.wdiconfEventsApiUrl}?date_from=${this.upNextDate}&time_from=${this.upNextTime}`)
       .map(res => <Event[]>res.json().results);
   }
 

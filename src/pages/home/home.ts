@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { Event } from '../../models/event';
+import { WdiconfEvents } from '../../providers/wdiconf-events';
+import { EventDetailsPage } from '../event-details/event-details';
 
 /*
   Generated class for the Home page.
@@ -12,11 +15,25 @@ import { NavController } from 'ionic-angular';
   templateUrl: 'home.html'
 })
 export class HomePage {
+  today;
+  events: Event[];
 
-  constructor(public navCtrl: NavController) {}
+
+
+  constructor(public navCtrl: NavController, private wdiconfEvents: WdiconfEvents) {
+    this.today = new Date().toISOString();
+    wdiconfEvents.loadUpNext().subscribe(events => {
+      this.events = events;
+    })
+  }
 
   ionViewDidLoad() {
     console.log('Hello HomePage Page');
   }
+
+
+    goToDetails(id: number) {
+      this.navCtrl.push(EventDetailsPage, {id});
+    }
 
 }
