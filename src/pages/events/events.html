@@ -19,8 +19,8 @@
 <ion-content padding>
   <ion-item>
     <ion-label>Date</ion-label>
-    <button ion-button>All</button>
     <ion-datetime displayFormat="DD/MM/YYYY" min="2016-12-09" max="2016-12-12" [(ngModel)]="today" (ionChange)="dateChange($event)"></ion-datetime>
+    <button ion-button item-right>All</button>
   </ion-item>
   <ion-list>
     <button detail-none ion-item *ngFor="let event of events" (click)="goToDetails(event.id)">
