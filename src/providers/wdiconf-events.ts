@@ -61,4 +61,9 @@ export class WdiconfEvents {
       .map(res => <Event[]>res.json().results);
   }
 
+  searchEvents(searchParam: string): Observable<Event[]> {
+    return this.http.get(`${this.wdiconfEventsApiUrl}?q=${searchParam}`)
+      .map(res => <Event[]>(res.json().results))
+  }  
+
 }

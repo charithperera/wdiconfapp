@@ -10,6 +10,7 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-searchbar (input)="search($event)"></ion-searchbar>
   <ion-list>
     <button ion-item *ngFor="let presenter of presenters" (click)="goToDetails(presenter.id)">
       <ion-avatar item-left>

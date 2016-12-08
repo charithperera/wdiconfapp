@@ -17,6 +17,7 @@
 
 
 <ion-content padding>
+  <ion-searchbar (input)="search($event)"></ion-searchbar>
   <ion-item>
     <ion-label>Date</ion-label>
     <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="today" (ionChange)="dateChange($event)"></ion-datetime>

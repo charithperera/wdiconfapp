@@ -32,6 +32,9 @@ export class WdiconfVenues {
       .map(res => <Venue>(res.json().results));
   }
 
-
+  searchVenues(searchParam: string): Observable<Venue[]> {
+    return this.http.get(`${this.wdiconfVenuesApiUrl}?q=${searchParam}`)
+      .map(res => <Venue[]>(res.json().results))
+  }
 
 }

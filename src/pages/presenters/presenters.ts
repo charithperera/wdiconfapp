@@ -17,10 +17,12 @@ import { PresenterDetailsPage } from '../presenter-details/presenter-details';
 })
 export class PresentersPage {
   presenters: Presenter[];
+  originalPresenters: Presenter[];
 
   constructor(public navCtrl: NavController, private wdiconfPresenters: WdiconfPresenters) {
     wdiconfPresenters.load().subscribe(presenters => {
       this.presenters = presenters;
+      this.originalPresenters = presenters;
     })
   }
 
@@ -30,6 +32,17 @@ export class PresentersPage {
 
   goToDetails(id: string) {
     this.navCtrl.push(PresenterDetailsPage, {id});
+  }
+
+  search(searchEvent) {
+    var term = searchEvent.target.value
+    if (term.trim() === '' || term.trim().length < 1) {
+      this.presenters = this.originalPresenters;
+    } else {
+      this.wdiconfPresenters.searchPresenters(term).subscribe(presenters => {
+        this.presenters = presenters;
+      });
+    }
   }
 
 }
