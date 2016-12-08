@@ -1,6 +1,6 @@
 declare var Stripe;
 import { Component, NgZone } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, LoadingController } from 'ionic-angular';
 import { Http, Headers, Response} from '@angular/http';
 import { HomePage } from '../../home/home';
 import { ProfilePage } from '../../pages/profile/profile';
@@ -26,9 +26,11 @@ export class PurchasePage {
   loggedIn: boolean = false;
   paymentError: string = '';
   buttonDisabled: boolean = null;
+  loading = this.loadingController.create({ content: "Please wait" });
 
-  constructor(public navCtrl: NavController, public http: Http, private _ngZone: NgZone) {
+  constructor(public navCtrl: NavController, public http: Http, private loadingController: LoadingController, private _ngZone: NgZone) {
     if (window.localStorage.getItem('wdiConfToken') !== null) {
+      this.loading.present();
       this.loggedIn = true;
       this.checkTicket();
     }
@@ -46,13 +48,15 @@ export class PurchasePage {
                this.hasTicket = true;
                this.ticketNumber = data.json().ticketNumber;
              }
+             this.loading.dismiss();
              resolve(true);
            }
            else {
+             this.loading.dismiss();
              resolve(false);
            }
-       });
-    });
+       })
+    })
   }
 
   ionViewDidLoad() {
@@ -65,11 +69,14 @@ export class PurchasePage {
     var success = false;
     this.buttonDisabled = true;
     Stripe.card.createToken(this.card, function(status, response) {
+      var paymentLoading = self.loadingController.create({ content: "Please wait" });
+      paymentLoading.present();
       if (response.error) {
         // need to show errorpage
         self._ngZone.run(() => {
           self.paymentError = response.error.message;
           self.buttonDisabled = null;
+          paymentLoading.dismiss();
         });
       }
       else {
@@ -86,10 +93,12 @@ export class PurchasePage {
                     self._ngZone.run(() => {
                       self.checkTicket();
                     });
+                    paymentLoading.dismiss();
                   }
                   resolve(true);
                 }
                 else {
+                  paymentLoading.dismiss();
                   resolve(false);
                 }
             });
