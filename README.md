@@ -13,6 +13,6 @@ HTML5, SCSS, Javascript, TypeScript, AngularJS, Ionic, Xcode
 
 [https://github.com/kschan1/wdiconfapi](https://github.com/kschan1/wdiconfapi)
 
-## Sample site on web browser
+## Sample app on web browser
 
 [https://jamesmah.github.io/wdiconfweb/](https://jamesmah.github.io/wdiconfweb/)
