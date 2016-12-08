@@ -1,9 +1,3 @@
-<!--
-  Generated template for the Purchase page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
   <ion-navbar>
     <button ion-button icon-only menuToggle>
@@ -15,9 +9,8 @@
   </ion-navbar>
 </ion-header>
 
-
 <ion-content padding>
-  <div *ngIf="!hasTicket">
+  <div *ngIf="!hasTicket && loggedIn">
     <form #form="ngForm" (ngSubmit)="logForm()" novalidate>
       <ion-item>
         <ion-label>Name</ion-label>
@@ -45,12 +38,14 @@
 
       <button ion-button type="submit" block>Add Todo</button>
     </form>
-    <p>{{hasTicket}}</p>
+    <p>{{paymentError}}</p>
   </div>
 
   <div *ngIf="hasTicket">
     <h2>Your ticket number is: {{ticketNumber}}</h2>
   </div>
 
-  <button ion-button (click)="checkTicket()">TRY HARDER</button>
+  <div *ngIf="!loggedIn">
+    <h2>You need an account to purchase tickets. Please signup via the Profile page.</h2>
+  </div>
 </ion-content>
