@@ -10,12 +10,16 @@
 
 
 <ion-content padding align="center">
-  <img [src]=venue?.image_url>
+  <img class="profile" [src]=venue?.image_url>
   <h3><ion-icon name="pin" item-left></ion-icon> {{venue?.address}}</h3>
 
   <ion-list>
     <button ion-item *ngFor="let event of venueEvents" (click)="goToEvent(event.id)">
+      <ion-avatar item-left>
+        <img [src]="event.image_url">
+      </ion-avatar>
       <h2>{{event.name}}</h2>
+      <p>{{ event?.date }} | {{ event?.time }}</p>
       <ion-icon name="arrow-forward" item-right></ion-icon>
     </button>
   </ion-list>

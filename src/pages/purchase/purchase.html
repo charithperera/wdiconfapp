@@ -24,11 +24,11 @@
 
       <ion-item>
         <ion-label>Exp Month</ion-label>
-        <ion-input type="text" size="2" [(ngModel)]="card.exp_month"  data-stripe="exp_month" name="exp_month"></ion-input>
+        <ion-input maxlength="2" type="text" size="2" [(ngModel)]="card.exp_month"  data-stripe="exp_month" name="exp_month"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>Exp year</ion-label>
-        <ion-input type="text" size="2" [(ngModel)]="card.exp_year"  data-stripe="exp_year" name="exp_year"></ion-input>
+        <ion-input maxlength="2" type="text" size="2" [(ngModel)]="card.exp_year"  data-stripe="exp_year" name="exp_year"></ion-input>
       </ion-item>
 
       <ion-item>
@@ -36,7 +36,7 @@
         <ion-input type="text" [(ngModel)]="card.cvc"  data-stripe="cvc" name="cvc"></ion-input>
       </ion-item>
 
-      <button ion-button type="submit" block>Add Todo</button>
+      <button ion-button type="submit" block>BUY TICKET</button>
     </form>
     <p>{{paymentError}}</p>
   </div>

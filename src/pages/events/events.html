@@ -17,6 +17,7 @@
 
 
 <ion-content padding>
+  <ion-searchbar (input)="search($event)"></ion-searchbar>
   <ion-item>
     <ion-label>Date</ion-label>
     <ion-datetime displayFormat="DD/MM/YYYY" min="2016-12-09" max="2016-12-12" [(ngModel)]="today" (ionChange)="dateChange($event)"></ion-datetime>
@@ -24,6 +25,9 @@
   </ion-item>
   <ion-list>
     <button detail-none ion-item *ngFor="let event of events" (click)="goToDetails(event.id)">
+      <ion-avatar item-left>
+        <img [src]="event.image_url">
+      </ion-avatar>
       <h2>{{ event?.name }}</h2>
       <p>{{ event?.date }} | {{ event?.time }}</p>
       <ion-icon name="arrow-forward" item-right></ion-icon>
