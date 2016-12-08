@@ -22,7 +22,7 @@
 
 <ion-content padding>
   <div *ngIf="showLogin">
-    <h1>Login page</h1>
+    <h1>LOGIN</h1>
     <form #form="ngForm" (ngSubmit)="loginForm(form)" novalidate>
        <ion-item>
          <ion-label>Email</ion-label>
@@ -41,7 +41,7 @@
    </div>
 
     <div *ngIf="showSignup">
-      <h1>Create an account</h1>
+      <h1>SIGN UP</h1>
       <form #form="ngForm" (ngSubmit)="signupForm(form)" novalidate>
         <ion-item>
            <ion-label>First name</ion-label>
@@ -62,7 +62,7 @@
          <br>
        <button ion-button type="submit" block>Sign up</button>
      </form>
-     
+
      <p>Have a user account?</p>
      <button color="light" ion-button (click)="loadLogin()">Login</button>
     </div>
@@ -73,7 +73,7 @@
     <img [src]="user.image_url" alt="">
 
     <p>This is your beautiful face.</p>
-  
+
     <button ion-button block (click)="logOut()">Log out</button>
   </div>
 </ion-content>

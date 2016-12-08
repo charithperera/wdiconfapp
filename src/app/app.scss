@@ -15,29 +15,45 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
+
+.content {
+  background-image: url("/images/bground.png");
+}
+
 img {
   width: 100%;
 }
 
-h1, h2, h3, p {
-  color: #D4D7DB;
+p {
+  color: #096849;
+  font-size: 1.2em;
 }
 
-h3 {
-  color: #81AEDA;
-  font-size: 1.3em;
+h1, h2, h3 {
+  color: #096849;
+  font-size: 1.4em;
+  font-weight: bold;
+}
+
+.label {
+  font-size: 1.4em;
+  color: #096849;
+  font-weight: bold;
 }
 
 .scroll-content,
 .item-block,
 .toolbar-background,
 .item-inner {
-  background-color: #3A3C3E;
-  color: white;
+  background-color: transparent;
+  // color: white;
+  color: black;
 }
+
 
 .toolbar-title,
 .back-button.show-back-button,
 .bar-button {
-  color: #81AEDA;
+  color: #096849;
+  font-size: 1.4em;
 }
