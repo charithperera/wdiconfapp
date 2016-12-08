@@ -15,7 +15,7 @@ import { Event } from '../models/event';
 export class WdiconfEvents {
   wdiconfEventsApiUrl = "https://wdiconfapi.herokuapp.com/api/events";
   now = new Date( Date.now() );
-  hours = this.now.getHours();
+  hours = this.now.getHours() < 10 ? ("0" + this.now.getHours()) : this.now.getHours();
   year = this.now.getFullYear();
   month = (this.now.getMonth() + 1 < 10) ? ("0" + ( this.now.getMonth() + 1 )) : this.now.getMonth() + 1;
   day = (this.now.getDate() < 10) ? ("0" + this.now.getDate()) : this.now.getDate();
@@ -64,6 +64,6 @@ export class WdiconfEvents {
   searchEvents(searchParam: string): Observable<Event[]> {
     return this.http.get(`${this.wdiconfEventsApiUrl}?q=${searchParam}`)
       .map(res => <Event[]>(res.json().results))
-  }  
+  }
 
 }
