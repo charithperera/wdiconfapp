@@ -2,8 +2,12 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { WdiconfEvents } from '../../providers/wdiconf-events';
 import { WdiconfVenues } from '../../providers/wdiconf-venues';
+import { WdiconfPresenters } from '../../providers/wdiconf-presenters';
 import { Event } from '../../models/event';
 import { Venue } from '../../models/venue';
+import { Presenter } from '../../models/presenter';
+import { PresenterDetailsPage } from '../presenter-details/presenter-details';
+
 
 
 
@@ -21,8 +25,9 @@ export class EventDetailsPage {
   event: Event;
   event_id: number;
   venue: Venue;
+  eventPresenters: Presenter[];
 
-  constructor(public navCtrl: NavController, private navParams: NavParams, private wdiconfEvents: WdiconfEvents, private wdiconfVenue: WdiconfVenues) {
+  constructor(public navCtrl: NavController, private navParams: NavParams, private wdiconfEvents: WdiconfEvents, private wdiconfVenue: WdiconfVenues, private wdiconfPresenters: WdiconfPresenters) {
     this.event_id = navParams.get('id');
     var self = this;
     wdiconfEvents.loadDetails(this.event_id).subscribe(event => {
@@ -32,10 +37,18 @@ export class EventDetailsPage {
       });
     });
 
+    wdiconfPresenters.loadForEvent(this.event_id).subscribe(presenters => {
+      this.eventPresenters = presenters;
+    })
+
   }
 
   ionViewDidLoad() {
     console.log('Hello EventDetailsPage Page');
+  }
+
+  goToPresenter(id: string) {
+    this.navCtrl.push(PresenterDetailsPage, {id});
   }
 
 }

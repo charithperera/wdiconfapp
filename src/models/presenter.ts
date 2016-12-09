@@ -5,4 +5,6 @@ export interface Presenter {
   company: string;
   title: string;
   email: string;
+  image_url: string;
+  bio: string;
 }
