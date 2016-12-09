@@ -62,23 +62,43 @@ h1, h2, h3 {
 }
 
 ion-list.list {
+  h2 {
+    letter-spacing: 1px;
+  }
   background-color: rgba(255,255,255,0.7)
 }
 
-.button-inner,
+button.disable-hover.button.button-ios.button-default.button-default-ios.button-block.button-block-ios {
+  background-color:  #096849;
+  color: white;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
 .searchbar-input {
   color: #096849;
   font-size: 1.2em;
+
 }
 
 ion-searchbar {
   background-repeat: yellow;
 }
 
+.icon {
+  color: #096849;
+}
+
 #lbl-7,
 #lbl-10,
+#lbl-11,
+#lbl-12,
+#lbl-13,
+#lbl-14,
+#lbl-15,
 #lbl-21,
 #lbl-19,
+#lbl-41,
 .datetime-text,
 .input-wrapper {
   color: #096849;
