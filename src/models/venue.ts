@@ -4,4 +4,5 @@ export interface Venue {
   id: string;
   name: string;
   address: number;
+  image_url: string;
 }
