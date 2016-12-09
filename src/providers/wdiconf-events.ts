@@ -14,12 +14,11 @@ import { Event } from '../models/event';
 @Injectable()
 export class WdiconfEvents {
   wdiconfEventsApiUrl = "https://wdiconfapi.herokuapp.com/api/events";
-  now = new Date( Date.now() );
+  now = new Date( Date.now() )
+  upNextToday = new Date( Date.now() ).toDateString();
+  temp = new Date( Date.now() );
+  upNextFromTmrw = new Date(this.temp.setDate(this.temp.getDate() + 1)).toDateString();
   hours = this.now.getHours() < 10 ? ("0" + this.now.getHours()) : this.now.getHours();
-  year = this.now.getFullYear();
-  month = (this.now.getMonth() + 1 < 10) ? ("0" + ( this.now.getMonth() + 1 )) : this.now.getMonth() + 1;
-  day = (this.now.getDate() < 10) ? ("0" + this.now.getDate()) : this.now.getDate();
-  upNextDate = "" + this.year + this.month + this.day;
   upNextTime = this.hours + "00";
 
   constructor(public http: Http) {
@@ -56,8 +55,13 @@ export class WdiconfEvents {
       .map(res => <Event[]>res.json().results);
   }
 
-  loadUpNext(): Observable<Event[]> {
-    return this.http.get(`${this.wdiconfEventsApiUrl}?date_from=${this.upNextDate}&time_from=${this.upNextTime}`)
+  loadUpNextToday(): Observable<Event[]> {
+    return this.http.get(`${this.wdiconfEventsApiUrl}?date=${this.upNextToday}&time_from=${this.upNextTime}&sort=date`)
+      .map(res => <Event[]>res.json().results);
+  }
+
+  loadUpNextFromTmrw(): Observable<Event[]> {
+    return this.http.get(`${this.wdiconfEventsApiUrl}?date_from=${this.upNextFromTmrw}&sort=date`)
       .map(res => <Event[]>res.json().results);
   }
 

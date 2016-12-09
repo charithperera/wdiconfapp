@@ -12,10 +12,12 @@
 <ion-content padding align="center">
 
   <img class="profile" [src]="presenter?.image_url">
-  <h2>{{presenter?.company}}</h2>
-  <h2>{{presenter?.title}}</h2>
+  <div class="pres-info">
+    <h2>{{presenter?.company}}</h2>
+    <h2>{{presenter?.title}}</h2>
+    <p class="pres-info">{{presenter?.bio}}</p>
+  </div>
 
-  <p>{{presenter?.bio}}</p>
   <ion-list>
     <button ion-item *ngFor="let event of presenterEvents" (click)="goToEvent(event.id)">
       <ion-avatar item-left>
