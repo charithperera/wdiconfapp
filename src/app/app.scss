@@ -17,7 +17,7 @@
 
 
 .content {
-  background-image: url("/images/bground.png");
+  background-image: url("../images/bground.png");
 }
 
 img {
@@ -41,6 +41,14 @@ h1, h2, h3 {
   font-size: 1.4em;
   color: #096849;
   font-weight: bold;
+
+  h2 {
+    font-weight: bold;
+  }
+
+  p {
+    color: #566055;
+  }
 }
 
 .scroll-content,
@@ -52,18 +60,42 @@ h1, h2, h3 {
   color: black;
 }
 
+ion-list.list {
+  background-color: rgba(255,255,255,0.7)
+}
 
-#lbl-7,
-#lbl-21,
-.input-wrapper {
+.button-inner,
+.searchbar-input {
   color: #096849;
   font-size: 1.2em;
 }
 
+ion-searchbar {
+  background-repeat: yellow;
+}
+
+#lbl-7,
+#lbl-10,
+#lbl-21,
+#lbl-19,
+.datetime-text,
+.input-wrapper {
+  color: #096849;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+ion-label.label.label-ios {
+  font-size: x-large;
+}
 
 .toolbar-title,
-.back-button.show-back-button,
 .bar-button {
   color: #096849;
   font-size: 1.4em;
+}
+
+.back-button.show-back-button {
+  color: #096849;
+  font-size: 1em;
 }
