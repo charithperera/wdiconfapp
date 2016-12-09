@@ -22,9 +22,15 @@ export class HomePage {
 
   constructor(public navCtrl: NavController, private wdiconfEvents: WdiconfEvents) {
     this.today = new Date().toISOString();
-    wdiconfEvents.loadUpNext().subscribe(events => {
-      this.events = events;
+    wdiconfEvents.loadUpNextToday().subscribe(events => {
+      this.events = events.slice(0,3);
+      wdiconfEvents.loadUpNextFromTmrw().subscribe(events => {
+
+        this.events = this.events.concat(events).slice(0,3);
+
+      })
     })
+
   }
 
   ionViewDidLoad() {
