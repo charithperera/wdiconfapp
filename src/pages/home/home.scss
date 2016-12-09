@@ -1,7 +1,17 @@
 page-home {
+  .home-logo {
+    width: 100%;
+  }
 
-}
+  h1 {
+    padding-bottom: 20px;
+  }
 
-.home-logo {
-  width: 100%;
+  .partners,
+  .closing-party,
+  .up-next {
+    background-color: rgba(255,255,255,0.7);
+    padding-bottom: 10%;
+  }
+
 }
