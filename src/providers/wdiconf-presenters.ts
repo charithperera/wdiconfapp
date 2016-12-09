@@ -30,6 +30,11 @@ export class WdiconfPresenters {
       .map(res => <Presenter>(res.json().results[0]))
   }
 
+  loadForEvent(id: Number): Observable<Presenter[]> {
+    return this.http.get(`${this.wdiconfPresentersApiUrl}?event_id=${id}`)
+      .map(res => <Presenter[]>res.json().results);
+  }
+
   searchPresenters(searchParam: string): Observable<Presenter[]> {
     return this.http.get(`${this.wdiconfPresentersApiUrl}?q=${searchParam}`)
       .map(res => <Presenter[]>(res.json().results))

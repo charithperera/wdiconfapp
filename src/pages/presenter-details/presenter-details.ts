@@ -7,7 +7,6 @@ import { WdiconfPresenters } from '../../providers/wdiconf-presenters';
 import { WdiconfEvents } from '../../providers/wdiconf-events';
 import { EventDetailsPage } from '../event-details/event-details';
 
-
 @Component({
   selector: 'page-presenter-details',
   templateUrl: 'presenter-details.html'
