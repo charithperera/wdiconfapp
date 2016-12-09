@@ -18,12 +18,14 @@
 
 <ion-content padding>
   <img class="profile" [src]="event?.image_url">
+  <div class="event-details">
+    <h3><ion-icon name="calendar" item-left></ion-icon>  {{event?.date}}</h3>
+    <h3><ion-icon name="time"></ion-icon> {{event?.time}}</h3>
+    <h3><ion-icon name="pin" item-left></ion-icon>  {{venue?.name}}</h3>
+    <h3>{{event?.name}}</h3>
+    <p>{{event?.description}}</p>
+  </div>
 
-  <h3><ion-icon name="calendar" item-left></ion-icon>  {{event?.date}}</h3>
-  <h3><ion-icon name="time"></ion-icon> {{event?.time}}</h3>
-  <h3><ion-icon name="pin" item-left></ion-icon>  {{venue?.name}}</h3>
-  <h3>{{event?.name}}</h3>
-  <p>{{event?.description}}</p>
   <h2>Presented By</h2>
   <ion-list>
     <button ion-item *ngFor="let presenter of eventPresenters" (click)="goToPresenter(presenter.id)">
@@ -34,4 +36,5 @@
       <ion-icon name="arrow-forward" item-right></ion-icon>
     </button>
   </ion-list>
+
 </ion-content>

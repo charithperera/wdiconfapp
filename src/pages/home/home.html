@@ -23,22 +23,31 @@
     <img src="/images/logo.png" alt="">
   </div>
 
-  <h2>Up Next...</h2>
-  <ion-list>
-    <button detail-none ion-item *ngFor="let event of events" (click)="goToDetails(event.id)">
-      <ion-avatar item-left>
-        <img [src]="event.image_url">
-      </ion-avatar>
-      <h2>{{ event?.name }}</h2>
-      <p>{{ event?.date }} | {{ event?.time }}</p>
-      <ion-icon name="arrow-forward" item-right></ion-icon>
-    </button>
-  </ion-list>
-
-  <div class="partners">
-
+  <div class="up-next">
+    <h2>Up Next...</h2>
+    <ion-list>
+      <button detail-none ion-item *ngFor="let event of events" (click)="goToDetails(event.id)">
+        <ion-avatar item-left>
+          <img [src]="event.image_url">
+        </ion-avatar>
+        <h2>{{ event?.name }}</h2>
+        <p>{{ event?.date }} | {{ event?.time }}</p>
+        <ion-icon name="arrow-forward" item-right></ion-icon>
+      </button>
+    </ion-list>
   </div>
 
-  
+
+  <div class="partners">
+    <h2>WDICONF2017 PARTNERS</h2>
+    <img src="/images/partners.png" alt="">
+  </div>
+
+  <div class="closing-party">
+    <h2>CLOSING PARTY</h2>
+    <p>Nile Rodgers and Chic to perform at WDICONF2017 closing party.</p>
+    <img src="/images/close-party.jpg" alt="">
+  </div>
+
 
   </ion-content>
