@@ -25,11 +25,10 @@ export class PurchasePage {
   hasTicket: boolean = false;
   loggedIn: boolean = false;
   paymentError: string = '';
+  buttonDisabled: boolean = null;
   loading = this.loadingController.create({ content: "Please wait" });
 
   constructor(public navCtrl: NavController, public http: Http, private loadingController: LoadingController, private _ngZone: NgZone) {
-
-
     if (window.localStorage.getItem('wdiConfToken') !== null) {
       this.loading.present();
       this.loggedIn = true;
@@ -68,6 +67,7 @@ export class PurchasePage {
     var url = 'https://wdiconfapi.herokuapp.com/payment';
     var self = this;
     var success = false;
+    this.buttonDisabled = true;
     Stripe.card.createToken(this.card, function(status, response) {
       var paymentLoading = self.loadingController.create({ content: "Please wait" });
       paymentLoading.present();
@@ -75,6 +75,7 @@ export class PurchasePage {
         // need to show errorpage
         self._ngZone.run(() => {
           self.paymentError = response.error.message;
+          self.buttonDisabled = null;
           paymentLoading.dismiss();
         });
       }
